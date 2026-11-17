@@ -62,6 +62,7 @@ export default function Team() {
         title={t(ui.pages.team.title)}
         lead={t(ui.pages.team.lead)}
         crumbs={[{ label: t(ui.nav.team) }]}
+        bgImage="/images/about/site-engineers-in-safety-vests.webp"
       />
 
       {leadership && (

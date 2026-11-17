@@ -32,10 +32,15 @@ export default function TrustStrip() {
                   </div>
                 ))
               : stats.map((stat) => (
-                  <div key={stat.id} className="flex flex-col-reverse md:px-8 md:first:pl-0">
-                    <dt className="mt-2 text-[0.9375rem] text-muted">{t(stat.label)}</dt>
-                    <dd className="font-display text-4xl font-bold tabular-nums text-ink md:text-5xl">
-                      <Counter value={stat.value} />
+                  <div
+                    key={stat.id}
+                    className="group flex flex-col-reverse transition-transform duration-200 hover:-translate-y-1 md:px-8 md:first:pl-0"
+                  >
+                    <dt className="mt-2 text-[0.9375rem] text-muted transition-colors group-hover:text-ink">
+                      {t(stat.label)}
+                    </dt>
+                    <dd className="font-display text-4xl font-bold tabular-nums text-ink transition-colors duration-200 group-hover:text-accent md:text-5xl">
+                      <Counter value={stat.value} suffix={stat.suffix} />
                     </dd>
                   </div>
                 ))}
@@ -47,8 +52,11 @@ export default function TrustStrip() {
           className="mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-line pt-8"
         >
           {site.credentials.map((credential) => (
-            <li key={credential.en} className="flex items-center gap-2 text-[0.9375rem] font-medium text-body">
-              <ShieldCheck className="size-4.5 text-ink" strokeWidth={1.5} aria-hidden="true" />
+            <li
+              key={credential.en}
+              className="flex items-center gap-2 rounded-lg border border-transparent px-2.5 py-1 text-[0.9375rem] font-medium text-body transition-all duration-200 hover:border-line hover:bg-sand/80 hover:text-ink"
+            >
+              <ShieldCheck className="size-4.5 text-accent" strokeWidth={1.75} aria-hidden="true" />
               {t(credential)}
             </li>
           ))}

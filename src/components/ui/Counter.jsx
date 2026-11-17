@@ -1,42 +1,88 @@
-import { useInView, useReducedMotion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '@/hooks/useLanguage'
+import { cn } from '@/utils/cn'
 import { formatNumber } from '@/utils/format'
 
-const DURATION_MS = 1200
-const easeOutCubic = (progress) => 1 - (1 - progress) ** 3
+/** Smooth ease-out cubic for realistic, satisfying acceleration and deceleration */
+const easeOutCubic = (x) => 1 - Math.pow(1 - x, 3)
 
-/** Counts up to `value` once, the first time it scrolls into view. */
-export default function Counter({ value }) {
+/**
+ * Animated counter that counts from 0 up to `value` once it enters the viewport.
+ * Supports numbers, Bengali digits, custom suffix (e.g. '+', '%'), and custom duration.
+ */
+export default function Counter({
+  value = 0,
+  suffix = '',
+  prefix = '',
+  duration = 1600,
+  className,
+}) {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '0px 0px -10% 0px' })
-  const reduceMotion = useReducedMotion()
   const { lang } = useLanguage()
   const [current, setCurrent] = useState(0)
+  const [hasStarted, setHasStarted] = useState(false)
+
+  const target = typeof value === 'number' ? value : Number(value) || 0
 
   useEffect(() => {
-    if (!inView || reduceMotion) return undefined
+    const el = ref.current
+    if (!el) return
 
-    let frame
-    const startedAt = performance.now()
+    // Trigger when 10% of the element is visible
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setHasStarted(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
+    )
 
-    const tick = (now) => {
-      const progress = Math.min((now - startedAt) / DURATION_MS, 1)
-      setCurrent(Math.round(value * easeOutCubic(progress)))
-      if (progress < 1) frame = requestAnimationFrame(tick)
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!hasStarted || target === 0) {
+      if (target === 0) setCurrent(0)
+      return
     }
 
-    frame = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(frame)
-  }, [inView, reduceMotion, value])
+    let frameId
+    const startTime = performance.now()
 
-  const shown = reduceMotion ? value : current
+    const updateCounter = (currentTime) => {
+      const elapsed = currentTime - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      const easedProgress = easeOutCubic(progress)
+      const nextValue = Math.round(target * easedProgress)
 
-  // The real value is exposed to assistive tech; the animated one is visual only.
+      setCurrent(nextValue)
+
+      if (progress < 1) {
+        frameId = requestAnimationFrame(updateCounter)
+      } else {
+        setCurrent(target)
+      }
+    }
+
+    frameId = requestAnimationFrame(updateCounter)
+    return () => cancelAnimationFrame(frameId)
+  }, [hasStarted, target, duration])
+
   return (
-    <span ref={ref}>
-      <span aria-hidden="true">{formatNumber(shown, lang)}</span>
-      <span className="sr-only">{formatNumber(value, lang)}</span>
+    <span ref={ref} className={cn('relative', className ?? 'inline-block tabular-nums')}>
+      <span aria-hidden="true">
+        {prefix}
+        {formatNumber(hasStarted ? current : 0, lang)}
+        {suffix}
+      </span>
+      <span className="sr-only">
+        {prefix}
+        {formatNumber(target, lang)}
+        {suffix}
+      </span>
     </span>
   )
 }

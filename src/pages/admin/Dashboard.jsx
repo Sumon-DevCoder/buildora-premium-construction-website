@@ -14,6 +14,7 @@ import {
 } from 'recharts'
 import KpiCard from '@/components/admin/KpiCard'
 import StatusBadge from '@/components/admin/StatusBadge'
+import Counter from '@/components/ui/Counter'
 import { LoadError, Skeleton } from '@/components/ui/Feedback'
 import { useApi } from '@/hooks/useApi'
 import { getAdminDashboard } from '@/services/adminApi'
@@ -58,14 +59,34 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <KpiCard label="Total Projects" value={data.kpis.totalProjects} hint="Across 18 districts" icon={FolderKanban} />
-        <KpiCard label="Ongoing Sites" value={data.kpis.ongoingProjects} hint="Active construction" icon={Clock} />
-        <KpiCard label="New Quotes" value={data.kpis.newQuotes} hint="Awaiting engineer call" icon={FileText} />
-        <KpiCard label="Unread Messages" value={data.kpis.unreadMessages} hint="Contact inbox" icon={Mail} />
+        <KpiCard
+          label="Total Projects"
+          value={<Counter value={data.kpis.totalProjects} duration={1000} />}
+          hint="Across 18 districts"
+          icon={FolderKanban}
+        />
+        <KpiCard
+          label="Ongoing Sites"
+          value={<Counter value={data.kpis.ongoingProjects} duration={1000} />}
+          hint="Active construction"
+          icon={Clock}
+        />
+        <KpiCard
+          label="New Quotes"
+          value={<Counter value={data.kpis.newQuotes} duration={1000} />}
+          hint="Awaiting engineer call"
+          icon={FileText}
+        />
+        <KpiCard
+          label="Unread Messages"
+          value={<Counter value={data.kpis.unreadMessages} duration={1000} />}
+          hint="Contact inbox"
+          icon={Mail}
+        />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <div className="rounded-xl border border-line bg-white p-6 lg:col-span-2">
+        <div className="min-w-0 rounded-xl border border-line bg-white p-4 sm:p-6 lg:col-span-2">
           <h2 className="font-display text-base font-semibold text-ink">Quote requests per month</h2>
           <p className="mt-0.5 text-xs text-muted">Last 6 months (demo trend)</p>
           <div className="mt-6 h-64">
@@ -94,7 +115,7 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-line bg-white p-6">
+        <div className="min-w-0 rounded-xl border border-line bg-white p-4 sm:p-6">
           <h2 className="font-display text-base font-semibold text-ink">Projects by category</h2>
           <p className="mt-0.5 text-xs text-muted">Portfolio distribution</p>
           <div className="mt-4 h-52">
@@ -141,7 +162,7 @@ export default function AdminDashboard() {
             </Link>
           </div>
           <div className="mt-4 overflow-x-auto">
-            <table className="w-full text-left text-sm">
+            <table className="min-w-[420px] w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-line text-xs text-muted">
                   <th className="pb-2.5 font-medium">Client</th>

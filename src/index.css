@@ -162,7 +162,7 @@
 @layer components {
   /* Inner page titles: one step below the home hero display size. */
   .text-h1 {
-    font-size: clamp(2.125rem, 1.5rem + 2.6vw, 3.5rem);
+    font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.025em;

@@ -4,6 +4,7 @@ import ErrorBoundary from '@/components/layout/ErrorBoundary'
 import Footer from '@/components/layout/Footer'
 import MobileActionBar from '@/components/layout/MobileActionBar'
 import Navbar from '@/components/layout/Navbar'
+import ScrollToTopButton from '@/components/layout/ScrollToTopButton'
 import { LoadingLabel } from '@/components/ui/Feedback'
 import { useLanguage } from '@/hooks/useLanguage'
 import { useSmoothScroll } from '@/hooks/useSmoothScroll'
@@ -45,6 +46,7 @@ export default function PublicLayout() {
 
       <Footer />
       <MobileActionBar />
+      <ScrollToTopButton />
     </>
   )
 }

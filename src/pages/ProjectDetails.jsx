@@ -8,6 +8,7 @@ import JsonLd from '@/components/seo/JsonLd'
 import Seo from '@/components/seo/Seo'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
+import Counter from '@/components/ui/Counter'
 import { LoadError, Skeleton } from '@/components/ui/Feedback'
 import Img from '@/components/ui/Img'
 import ProjectCard from '@/components/ui/ProjectCard'
@@ -193,6 +194,7 @@ export default function ProjectDetails() {
         title={t(project.title)}
         lead={t(project.subtitle)}
         crumbs={[{ label: t(ui.nav.projects), to: '/projects' }, { label: t(project.title) }]}
+        bgImage={project.cover_image}
       >
         <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-white/75">
           <span className="inline-flex items-center gap-1.5">
@@ -204,7 +206,9 @@ export default function ProjectDetails() {
           {project.status === 'ongoing' && (
             <>
               <span aria-hidden="true">·</span>
-              <span className="tabular-nums">{localizeDigits(project.progress, lang)}%</span>
+              <span className="tabular-nums">
+                <Counter value={project.progress} suffix="%" duration={1200} />
+              </span>
             </>
           )}
         </div>
@@ -225,7 +229,9 @@ export default function ProjectDetails() {
                 <div className="rounded-xl border border-line bg-sand p-6">
                   <div className="flex items-center justify-between text-sm font-semibold text-ink">
                     <span>{t(ui.project.progress)}</span>
-                    <span className="tabular-nums">{localizeDigits(project.progress, lang)}%</span>
+                    <span className="tabular-nums">
+                      <Counter value={project.progress} suffix="%" duration={1200} />
+                    </span>
                   </div>
                   <div className="mt-3 h-2 overflow-hidden rounded-full bg-line">
                     <div

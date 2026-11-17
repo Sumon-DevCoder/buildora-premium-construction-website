@@ -141,13 +141,14 @@ export default function Contact() {
         title={t(ui.pages.contact.title)}
         lead={t(ui.pages.contact.lead)}
         crumbs={[{ label: t(ui.nav.contact) }]}
+        bgImage="/images/projects/rebar-foundation-work.webp"
       />
 
       <section className="bg-white py-16 md:py-24">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
-              <div className="rounded-xl border border-line bg-white p-6 md:p-10">
+              <div className="rounded-xl border border-line bg-white p-5 sm:p-8 md:p-10">
                 {submitted ? (
                   <div className="py-8 text-left">
                     <div className="flex size-14 items-center justify-center rounded-full bg-accent-soft text-accent">
@@ -352,7 +353,7 @@ export default function Contact() {
                       </div>
                     )}
 
-                    <div className="mt-8 flex items-center justify-between gap-4 border-t border-line pt-6">
+                    <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-6">
                       {step > 1 ? (
                         <Button type="button" variant="secondary" onClick={() => setStep((s) => s - 1)}>
                           <ArrowLeft className="size-4" strokeWidth={2} aria-hidden="true" />

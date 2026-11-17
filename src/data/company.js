@@ -4,10 +4,10 @@
  */
 
 export const stats = [
-  { id: 1, value: 14, suffix: '', label: { en: 'Years in construction', bn: 'বছরের অভিজ্ঞতা' } },
-  { id: 2, value: 147, suffix: '', label: { en: 'Projects completed', bn: 'সম্পন্ন প্রকল্প' } },
+  { id: 1, value: 14, suffix: '+', label: { en: 'Years in construction', bn: 'বছরের অভিজ্ঞতা' } },
+  { id: 2, value: 147, suffix: '+', label: { en: 'Projects completed', bn: 'সম্পন্ন প্রকল্প' } },
   { id: 3, value: 18, suffix: '', label: { en: 'Districts covered', bn: 'জেলায় কাজ' } },
-  { id: 4, value: 36, suffix: '', label: { en: 'Engineers and staff', bn: 'ইঞ্জিনিয়ার ও কর্মী' } },
+  { id: 4, value: 36, suffix: '+', label: { en: 'Engineers and staff', bn: 'ইঞ্জিনিয়ার ও কর্মী' } },
 ]
 
 export const reasons = [

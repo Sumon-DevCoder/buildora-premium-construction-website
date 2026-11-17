@@ -60,6 +60,7 @@ export default function Services() {
         title={t(ui.pages.services.title)}
         lead={t(ui.pages.services.lead)}
         crumbs={[{ label: t(ui.nav.services) }]}
+        bgImage="/images/projects/site-engineers-rebar-work.webp"
       />
 
       <section className="bg-white py-18 md:py-24 lg:py-32">

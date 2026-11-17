@@ -17,7 +17,7 @@ function ArrowButton({ label, onClick, children }) {
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="inline-flex size-12 items-center justify-center rounded-lg border border-line text-ink transition-colors hover:border-ink"
+      className="inline-flex size-12 items-center justify-center rounded-lg border border-line text-ink transition-all duration-200 hover:border-ink hover:bg-ink hover:text-white hover:scale-105 active:scale-95"
     >
       {children}
     </button>

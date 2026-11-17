@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
@@ -13,15 +14,19 @@ const HERO_IMAGE = '/images/hero/construction-site-high-rise-bangladesh.webp'
  * One photo, one message, one primary action.
  */
 export default function Hero() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
+  const reduceMotion = useReducedMotion()
 
   return (
     <section className="relative isolate flex min-h-svh items-end overflow-hidden bg-ink md:items-center">
-      <img
+      <motion.img
         src={HERO_IMAGE}
         alt={t(ui.hero.imageAlt)}
         fetchPriority="high"
         decoding="async"
+        initial={reduceMotion ? false : { scale: 1.08 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
         className="absolute inset-0 -z-20 h-full w-full object-cover"
       />
       {/* Dark overlay keeps the text readable outdoors and on any photo. */}
@@ -32,6 +37,16 @@ export default function Hero() {
 
       <Container className="pb-14 pt-32 md:pb-24 md:pt-40">
         <div className="max-w-2xl">
+          <Reveal as="div" className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1 backdrop-blur-sm">
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+            </span>
+            <span className="text-xs font-medium text-white/90">
+              {lang === 'bn' ? '২০২৬-এ নতুন কনস্ট্রাকশন বুকিং উন্মুক্ত' : 'Accepting new projects across Bangladesh'}
+            </span>
+          </Reveal>
+
           <Reveal as="p" className="eyebrow text-white/75">
             {t(ui.hero.eyebrow)}
           </Reveal>

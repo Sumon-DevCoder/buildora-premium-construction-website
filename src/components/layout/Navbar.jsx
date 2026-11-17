@@ -59,12 +59,14 @@ export default function Navbar() {
       <header
         className={cn(
           'fixed inset-x-0 top-0 z-50 border-b transition-[transform,background-color,border-color,color] duration-300 ease-soft',
-          solid ? 'border-line bg-white text-ink' : 'border-transparent bg-transparent text-white',
+          solid
+            ? 'border-line/80 bg-white/90 backdrop-blur-md text-ink shadow-xs'
+            : 'border-transparent bg-transparent text-white',
           hidden && !open ? '-translate-y-full' : 'translate-y-0',
         )}
       >
         <Container className="flex h-16 items-center justify-between gap-6 md:h-20">
-          <Link to="/" aria-label={`${site.name} – ${t(ui.nav.home)}`} className="shrink-0">
+          <Link to="/" aria-label={`${site.name} – ${t(ui.nav.home)}`} className="shrink-0 transition-opacity hover:opacity-85">
             <Logo />
           </Link>
 
@@ -75,9 +77,22 @@ export default function Navbar() {
                   <NavLink
                     to={link.to}
                     end={link.end}
-                    className="border-b-2 border-transparent py-2 text-[0.9375rem] font-medium transition-colors hover:border-current aria-[current=page]:border-accent"
+                    className="group relative py-2 text-[0.9375rem] font-medium transition-colors hover:text-accent"
                   >
-                    {t(link.label)}
+                    {({ isActive }) => (
+                      <>
+                        <span className={isActive ? 'text-accent font-semibold' : 'text-current'}>
+                          {t(link.label)}
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className={cn(
+                            'absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-accent transition-all duration-300 ease-soft',
+                            isActive ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100',
+                          )}
+                        />
+                      </>
+                    )}
                   </NavLink>
                 </li>
               ))}
@@ -97,9 +112,11 @@ export default function Navbar() {
               </a>
             )}
 
-            <Button to="/contact" className="hidden lg:inline-flex">
-              {t(ui.nav.getQuote)}
-            </Button>
+            <div className="hidden md:block">
+              <Button to="/contact">
+                {t(ui.nav.getQuote)}
+              </Button>
+            </div>
 
             <button
               type="button"

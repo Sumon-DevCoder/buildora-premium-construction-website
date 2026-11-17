@@ -45,6 +45,7 @@ export default function About() {
         title={t(ui.pages.about.title)}
         lead={t(ui.pages.about.lead)}
         crumbs={[{ label: t(ui.nav.about) }]}
+        bgImage="/images/about/construction-team-steel-rods-site.webp"
       />
 
       <section className="bg-white py-18 md:py-24 lg:py-32">

@@ -62,7 +62,7 @@ export default function AdminQuotes() {
       ) : (
         <div className="overflow-hidden rounded-xl border border-line bg-white">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
+            <table className="min-w-[620px] w-full text-left text-sm">
               <thead className="border-b border-line bg-sand/60 text-xs text-muted">
                 <tr>
                   <th className="px-4 py-3 font-medium">Client</th>

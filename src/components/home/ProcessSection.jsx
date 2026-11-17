@@ -54,17 +54,21 @@ export default function ProcessSection() {
                   as="li"
                   key={step.id}
                   delay={(index % 3) * 0.08}
-                  className="relative border-l border-white/20 pb-10 pl-7 last:pb-0 md:pb-12 lg:border-l-0 lg:pb-0 lg:pl-0 lg:pt-8"
+                  className="group relative border-l border-white/20 pb-10 pl-7 transition-all duration-300 last:pb-0 md:pb-12 lg:border-l-0 lg:pb-0 lg:pl-0 lg:pt-8"
                 >
                   <span
                     aria-hidden="true"
-                    className="absolute -left-[5px] top-1.5 size-2.5 rounded-full bg-accent lg:-top-[5px] lg:left-0"
+                    className="absolute -left-[5px] top-1.5 size-2.5 rounded-full bg-accent transition-all duration-300 group-hover:scale-150 group-hover:shadow-[0_0_12px_rgba(194,65,12,0.8)] lg:-top-[5px] lg:left-0"
                   />
                   <p className="font-display text-[0.9375rem] font-semibold tabular-nums text-accent-soft">
                     {localizeDigits(String(index + 1).padStart(2, '0'), lang)}
                   </p>
-                  <h3 className="text-h3 mt-2 text-white">{t(step.title)}</h3>
-                  <p className="mt-2 max-w-sm text-[0.9375rem] text-white/70">{t(step.text)}</p>
+                  <h3 className="text-h3 mt-2 text-white transition-colors duration-200 group-hover:text-accent-soft">
+                    {t(step.title)}
+                  </h3>
+                  <p className="mt-2 max-w-sm text-[0.9375rem] text-white/70 transition-colors duration-200 group-hover:text-white/90">
+                    {t(step.text)}
+                  </p>
                 </Reveal>
               ))}
             </ol>

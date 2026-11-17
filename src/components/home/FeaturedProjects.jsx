@@ -13,7 +13,8 @@ import { cn } from '@/utils/cn'
 // Phones: swipe row with the next card peeking. Desktop: 3-column grid.
 const ROW =
   'no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 md:mx-0 md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-12 md:overflow-visible md:px-0 lg:grid-cols-3'
-const CELL = 'w-[82%] shrink-0 snap-start md:w-auto'
+// `relative` keeps any absolutely positioned child (e.g. sr-only text) inside the scroll row.
+const CELL = 'relative w-[82%] shrink-0 snap-start md:w-auto'
 
 /** "Have they built something like mine?" */
 export default function FeaturedProjects() {

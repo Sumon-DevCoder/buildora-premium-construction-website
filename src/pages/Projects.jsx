@@ -72,6 +72,7 @@ export default function Projects() {
         title={t(ui.pages.projects.title)}
         lead={t(ui.pages.projects.lead)}
         crumbs={[{ label: t(ui.nav.projects) }]}
+        bgImage="/images/projects/city-square-shopping-mall-construction-narayanganj.webp"
       />
 
       <section className="bg-white py-16 md:py-24">
