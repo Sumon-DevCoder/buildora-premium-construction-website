@@ -1,0 +1,5 @@
+export { faqs } from './faqs'
+export { processSteps, reasons, stats, story, timeline, values } from './company'
+export { team, testimonials } from './people'
+export { projectCategories, projects } from './projects'
+export { services } from './services'
